@@ -66,7 +66,7 @@ session = tf.Session(server.target)
 
 
 ##Read and exec params
-with open('/data/3D/params.txt', 'r') as params_file:
+with open('../data/3D/params.txt', 'r') as params_file:
     params = params_file.read()
 
 exec params
@@ -78,11 +78,11 @@ import scipy.io
 import h5py 
 
 # Array elements position [x y z] - matrix array 32x32 Vermon
-data = scipy.io.loadmat('/data/3D/elem_pos.mat')
+data = scipy.io.loadmat('../data/3D/elem_pos.mat')
 element_pos = np.array(data['elem_pos'])
 
 # Selection of points to beamform
-data = scipy.io.loadmat('/data/3D/bf_points.mat')
+data = scipy.io.loadmat('../data/3D/bf_points.mat')
 bf_points = np.array(data['bf_points'])
 
 
@@ -91,7 +91,7 @@ bf_points = np.array(data['bf_points'])
 #np.set_printoptions(threshold=np.nan)
 
 ##Create graph from xml file
-tparser = TParser('/data/3D/bf_flow_local.xml')
+tparser = TParser('../data/3D/bf_flow_local.xml')
 tparser.parse_xml()
 tparser.print_commands()
 

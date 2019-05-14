@@ -76,14 +76,14 @@ exec params
 import scipy.io
 import h5py 
 
-data = scipy.io.loadmat('/data/3D/est_points.mat')
+data = scipy.io.loadmat('../data/3D/est_points.mat')
 estimation_point = np.array(data['estimation_point'])
 estimation_point_len = len(estimation_point)
 num_estimation_points = len(estimation_point)
 indexing = (num_angles_theta * num_angles_phi * num_line_points*num_estimation_points) / num_slices
 
 
-data = scipy.io.loadmat('/data/3D/elem_pos.mat')
+data = scipy.io.loadmat('../data/3D/elem_pos.mat')
 element_pos = np.array(data['elem_pos'])
 
 
@@ -92,7 +92,7 @@ element_pos = np.array(data['elem_pos'])
 #np.set_printoptions(threshold=np.nan)
 
 ##Create graph from xml file
-tparser = TParser('/data/3D/vfi_param_localq_multi_fast_full15.xml')
+tparser = TParser('../data/3D/vfi_param_localq_multi_fast_full15.xml')
 tparser.parse_xml()
 tparser.print_commands()
 
