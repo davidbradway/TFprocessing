@@ -65,7 +65,7 @@ session = tf.Session(server.target)
 
 
 ##Read and exec params
-with open('/data/3D/params.txt', 'r') as params_file:
+with open('../data/3D/params.txt', 'r') as params_file:
     params = params_file.read()
 
 exec params
