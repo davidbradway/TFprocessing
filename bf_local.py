@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-'''
+"""
     To run use: 
     python bf_local.py --worker_hosts=localhost:2500 --job_name=worker --task_index=0
     
@@ -25,7 +25,7 @@
     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
     SOFTWARE.
-'''
+"""
 import numpy as np
 import tensorflow as tf
 import threading
@@ -35,9 +35,10 @@ import scipy.io as sio
 from core.queues import *
 from core.graph_parser import *
 from input_readers.input_reader_multi import *
+import scipy.io
+import h5py
 
 from core.ultrasound_tensor_ops import UltrasoundOp
-
 
 # Flags for defining the tf.train.ClusterSpec
 tf.app.flags.DEFINE_string("worker_hosts", "", "Comma-separated list of hostname:port pairs")
@@ -58,24 +59,17 @@ server = tf.train.Server(cluster, job_name=FLAGS.job_name, task_index=FLAGS.task
 
 session = tf.Session(server.target)
 
+# ########################################DATA TO BE READ IN #########################################
+# import os
+# cur_dir = os.getcwd()
 
-
-#########################################DATA TO BE READ IN #########################################
-##import os
-##cur_dir = os.getcwd()
-
-
-##Read and exec params
+# Read and exec params
 with open('../data/3D/params.txt', 'r') as params_file:
     params = params_file.read()
 
 exec params
 
-
-#################################### END READ DATA ################################################
-
-import scipy.io
-import h5py 
+# ################################### END READ DATA ################################################
 
 # Array elements position [x y z] - matrix array 32x32 Vermon
 data = scipy.io.loadmat('../data/3D/elem_pos.mat')
@@ -85,24 +79,19 @@ element_pos = np.array(data['elem_pos'])
 data = scipy.io.loadmat('../data/3D/bf_points.mat')
 bf_points = np.array(data['bf_points'])
 
+# np.set_printoptions(threshold=np.nan)
 
-
-
-#np.set_printoptions(threshold=np.nan)
-
-##Create graph from xml file
+# Create graph from xml file
 tparser = TParser('../data/3D/bf_flow_local.xml')
 tparser.parse_xml()
 tparser.print_commands()
 
 exec tparser.return_code()
 
-#with open('data_test/test_code.txt', 'r') as testcode_file:
- #   testcode = testcode_file.read()
+# with open('data_test/test_code.txt', 'r') as testcode_file:
+#     testcode = testcode_file.read()
 
-#exec testcode
+# exec testcode
 
-
-if __name__=="__main__":
-   main()
-
+if __name__ == "__main__":
+    main()
