@@ -104,6 +104,6 @@ exec tparser.return_code()
 #exec testcode
 
 
-if __name__=="__main__":
-   main()
+if __name__ == "__main__":
+    main()
 
