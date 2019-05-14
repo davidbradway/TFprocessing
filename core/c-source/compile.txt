@@ -1,0 +1,3 @@
+To compile: 
+
+g++ -std=c++11  -mavx -fopenmp -O2 -shared ultrasound.cc -o ultrasound.so -fPIC -I /dtu/cfu/data/fast/cavh/tf/include -lfftw3 -lm
