@@ -47,7 +47,8 @@ cur_dir = os.getcwd()
 
 class UltrasoundOp:
   def __init__(self):
-    self._ultrasound_op = load_library.load_op_library('ultrasound.so')
+    self._ultrasound_op = load_library.load_op_library(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), 'ultrasound.so'))
     assert self._ultrasound_op, "Could not load ultrasound.so."
 
   def add_one(self, inarray):
