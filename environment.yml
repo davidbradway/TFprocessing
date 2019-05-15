@@ -1,0 +1,6 @@
+name: tf11
+dependencies:
+  - python=2.7.12
+  - tensorflow=1.1
+  - h5py=2.7.1
+  - scipy=0.19.1
