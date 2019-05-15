@@ -40,7 +40,6 @@ class input_reader_multi(object):
         self.curr_frame_idx = 1
         self.find_files(self.cur_dir + '/seq_%s' % str(self.curr_frame_idx).zfill(4))
    
-
     def find_files(self, load_dir):
         
         for k in range(5):
@@ -54,10 +53,9 @@ class input_reader_multi(object):
                 samples = samples - np.tile(mean_samples, [np.shape(samples)[0], 1])
                 self.all_samples.append(samples)
         self.all_samples = np.reshape(np.array(self.all_samples), (5, 64, np.shape(self.all_samples)[1],np.shape(self.all_samples)[2]))
-                    
 
-    def get_next_batch(self,time_idx=0):
-        if (self.curr_frame_idx != (time_idx+1)):
+    def get_next_batch(self, time_idx=0):
+        if self.curr_frame_idx != (time_idx+1):
             self.all_samples = []
             self.find_files(self.cur_dir + '/seq_%s' % str(time_idx+1).zfill(4))
             self.curr_frame_idx = time_idx+1
@@ -65,7 +63,3 @@ class input_reader_multi(object):
         samples = self.all_samples[self.internal_counter]
         self.internal_counter = (self.internal_counter + 1) % 5
         return samples
-
-
-        
-
