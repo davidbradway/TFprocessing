@@ -46,13 +46,13 @@ class input_reader_multi(object):
         for k in range(5):
             j = 1
             for i in range(64):
-               data = sio.loadmat(load_dir + '/elem_data_em%s.mat' % str(j+k).zfill(4))
-               j += 5
-               samples = np.array(data['samples'])
-               samples = samples.astype(np.float64)
-               mean_samples = np.mean(samples,axis=0,keepdims=True)
-               samples = samples - np.tile(mean_samples,[np.shape(samples)[0], 1])
-               self.all_samples.append(samples)
+                data = sio.loadmat(load_dir + '/elem_data_em%s.mat' % str(j+k).zfill(4))
+                j += 5
+                samples = np.array(data['samples'])
+                samples = samples.astype(np.float64)
+                mean_samples = np.mean(samples, axis=0, keepdims=True)
+                samples = samples - np.tile(mean_samples, [np.shape(samples)[0], 1])
+                self.all_samples.append(samples)
         self.all_samples = np.reshape(np.array(self.all_samples), (5, 64, np.shape(self.all_samples)[1],np.shape(self.all_samples)[2]))
                     
 
